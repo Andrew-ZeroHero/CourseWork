@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать Доставку</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function confirmDeletion() {
+            return confirm("Вы уверены, что хотите удалить эту доставку?");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Редактировать Доставку</h2>
+        <form method="POST">
+            <label for="address">Адрес доставки:</label>
+            <input type="text" id="address" name="address" value="{{ delivery.address }}" required><br>
+
+            <label for="phone_number">Номер телефона заказчика:</label>
+            <input type="text" id="phone_number" name="phone_number" value="{{ delivery.phone_number }}" required><br>
+
+            <label for="order_ids">Номер заказа/заказов:</label>
+            <input type="text" id="order_ids" name="order_ids" value="{{ delivery.order_ids }}" required><br>
+
+            <label for="contents">Содержимое доставки:</label>
+            <textarea id="contents" name="contents" required>{{ delivery.contents }}</textarea><br>
+
+            <label for="status">Статус доставки:</label>
+            <select id="status" name="status">
+                <option value="ожидание" {% if delivery.status == 'ожидание' %}selected{% endif %}>Ожидание</option>
+                <option value="в процессе" {% if delivery.status == 'в процессе' %}selected{% endif %}>В процессе</option>
+                <option value="доставлено" {% if delivery.status == 'доставлено' %}selected{% endif %}>Доставлено</option>
+            </select><br>
+
+            <button type="submit">Сохранить изменения</button>
+        </form>
+
+        <form method="POST" style="margin-top: 20px;" onsubmit="return confirmDeletion();">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="delete-button">Удалить доставку</button>
+        </form>
+
+        <a href="{{ url_for('deliveries') }}" class="button">Вернуться назад</a>
+    </div>
+</body>
+</html>

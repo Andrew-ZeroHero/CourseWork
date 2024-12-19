@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать Постороннего</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function confirmAction(action) {
+            return confirm(`Вы уверены, что хотите ${action} этого пользователя?`);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Редактировать Постороннего</h2>
+        <form method="POST">
+            <label for="full_name">ФИО:</label>
+            <input type="text" id="full_name" name="full_name" value="{{ outsider.full_name }}" disabled><br>
+
+            <label for="phone_number">Номер телефона:</label>
+            <input type="text" id="phone_number" name="phone_number" value="{{ outsider.phone_number }}" disabled><br>
+
+            <label for="birth_date">Дата рождения:</label>
+            <input type="date" id="birth_date" name="birth_date" value="{{ outsider.birth_date }}" disabled><br>
+
+            <label for="login">Логин:</label>
+            <input type="text" id="login" name="login" value="{{ outsider.login }}" disabled><br>
+
+            <button type="submit" name="promote" onclick="return confirmAction('повысить до курьера');">Повысить до курьера</button>
+        </form>
+
+        <form method="POST" style="margin-top: 20px;">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" name="delete" class="delete-button" onclick="return confirmAction('удалить');">Отклонить</button>
+        </form>
+
+        <a href="{{ url_for('outsiders') }}" class="button">Вернуться назад</a>
+    </div>
+</body>
+</html>

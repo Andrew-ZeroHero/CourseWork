@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать Курьера</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function confirmDeletion() {
+            if (confirm("Вы уверены, что хотите удалить этого курьера?")) {
+                document.getElementById('delete-form').submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Редактировать Курьера</h2>
+        <form method="POST">
+            <label for="full_name">ФИО:</label>
+            <input type="text" id="full_name" name="full_name" value="{{ courier.full_name }}" required><br>
+
+            <label for="phone_number">Номер телефона:</label>
+            <input type="text" id="phone_number" name="phone_number" value="{{ courier.phone_number }}" required><br>
+
+            <label for="birth_date">Дата рождения:</label>
+            <input type="date" id="birth_date" name="birth_date" value="{{ courier.birth_date }}" required><br>
+
+            <label for="login">Логин:</label>
+            <input type="text" id="login" name="login" value="{{ courier.login }}" required><br>
+
+            <button type="submit">Сохранить изменения</button>
+        </form>
+
+        <form id="delete-form" action="{{ url_for('edit_courier', courier_id=courier.id) }}" method="POST">
+            <!-- Имитация метода DELETE -->
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="button" class="delete-button" onclick="confirmDeletion()">Удалить курьера</button>
+        </form>
+
+        <a href="{{ url_for('couriers') }}" class="button">Вернуться назад</a>
+    </div>
+</body>
+</html>

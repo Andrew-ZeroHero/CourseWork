@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель Курьера</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Панель Курьера</h2>
+        <h3>Активные доставки</h3>
+        <ul>
+            {% for delivery in active_deliveries %}
+                <li>
+                    <strong>{{ delivery.id }}</strong>: {{ delivery.address }}<br>
+                    <a href="{{ url_for('delivery_details', id=delivery.id) }}">Подробнее</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <h3>Доступные доставки</h3>
+        <ul>
+            {% for delivery in available_deliveries %}
+                <li>
+                    <strong>{{ delivery.id }}</strong>: {{ delivery.address }}<br>
+                    <a href="{{ url_for('delivery_details', id=delivery.id) }}">Подробнее</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('logout') }}" class="button">Выйти</a>
+    </div>
+</body>
+</html>

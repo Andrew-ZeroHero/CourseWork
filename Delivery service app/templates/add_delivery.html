@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить доставку</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Добавить новую доставку</h2>
+        <form method="POST">
+            <label for="address">Адрес доставки:</label>
+            <input type="text" id="address" name="address" placeholder="Введите адрес" required><br>
+
+            <label for="customer_phone">Номер телефона заказчика:</label>
+            <input type="text" id="customer_phone" name="customer_phone" placeholder="Введите номер телефона" required><br>
+
+            <label for="order_number">Номера заказов (через запятую):</label>
+            <input type="text" id="order_number" name="order_number" placeholder="Например: 101, 102, 103" required><br>
+
+            <label for="order_content">Содержимое доставки:</label>
+            <textarea id="order_content" name="order_content" rows="4" placeholder="Введите описание содержимого" required></textarea><br>
+
+            <button type="submit">Добавить доставку</button>
+        </form>
+        <a href="{{ url_for('manager_dashboard') }}" class="button">Вернуться назад</a>
+    </div>
+</body>
+</html>

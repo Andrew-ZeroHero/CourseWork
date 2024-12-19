@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель Постороннего</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Добро пожаловать!</h2>
+        <p>Ваша учетная запись пока не активирована. Пожалуйста, дождитесь подтверждения.</p>
+        <div style="text-align: center;">
+            <img src="{{ url_for('static', filename='images/kanevsky.gif') }}" alt="Леонид Каневский" style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+        <a href="{{ url_for('logout') }}" class="button">Выйти</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель Менеджера</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Панель Менеджера</h2>
+        <div class="actions">
+            <a href="{{ url_for('delivery_log') }}" class="button">Просмотреть логи доставок</a><br>
+            <a href="{{ url_for('couriers') }}" class="button">Список курьеров</a><br>
+            <a href="{{ url_for('outsiders') }}" class="button">Список посторонних</a><br>
+            <a href="{{ url_for('add_delivery') }}" class="button">Добавить доставку</a><br>
+            <a href="{{ url_for('logout') }}" class="button">Выход</a><br>
+        </div>
+        <h3>Список доставок</h3>
+        <ul>
+            {% for delivery in deliveries %}
+                <li>
+                    <strong>Доставка № {{ delivery.id }}</strong>:<br>
+                    Статус: {{ delivery.status }}<br>
+                    Адрес: {{ delivery.address }}<br>
+                    Номер телефона: {{ delivery.customer_phone }}<br>
+                    Номер заказа(-ов): {{ delivery.order_number }}<br>
+                    <a href="{{ url_for('edit_delivery', delivery_id=delivery.id) }}" class="button">Редактировать</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('logout') }}" class="button">Выйти</a>
+    </div>
+</body>
+</html>

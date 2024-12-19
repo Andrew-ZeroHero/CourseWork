@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали доставки</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Детали доставки</h2>
+        <p><strong>Номер доставки:</strong> {{ delivery.id }}</p>
+        <p><strong>Адрес:</strong> {{ delivery.address }}</p>
+        <p><strong>Номер заказчика:</strong> {{ delivery.customer_phone }}</p>
+        <p><strong>Содержимое:</strong> {{ delivery.order_content }}</p>
+
+        {% if delivery.status == 'in_process' %}
+            <form method="POST">
+                <label>Введите код подтверждения:</label>
+                <input type="text" name="code" required><br>
+                <button type="submit" name="confirm_delivery">Подтвердить доставку</button>
+            </form>
+        {% elif delivery.status == 'waiting' %}
+            <form method="POST">
+                <button type="submit" name="start_delivery" onclick="return confirmAction('начать доставку');">Начать доставку</button>
+            </form>
+        {% endif %}
+        <a href="{{ url_for('courier_dashboard') }}" class="button">Назад</a>
+    </div>
+</body>
+</html>
